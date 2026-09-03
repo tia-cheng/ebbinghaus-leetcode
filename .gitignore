@@ -1,0 +1,10 @@
+node_modules
+.plasmo
+build
+.env
+.env.local
+.env.development
+.env.production
+*.pem
+.DS_Store
+*.tsbuildinfo

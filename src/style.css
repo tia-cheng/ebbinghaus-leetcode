@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 悬浮窗滚动条美化（仅作用于 Shadow DOM 内部，不会影响 LeetCode 页面） */
+.max-h-96::-webkit-scrollbar {
+  width: 6px;
+}
+.max-h-96::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}

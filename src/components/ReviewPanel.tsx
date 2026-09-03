@@ -2,6 +2,7 @@ import { Fragment, useState } from "react"
 
 import { Popover, Transition } from "@headlessui/react"
 
+import { DebugPanel } from "~components/DebugPanel"
 import { ReviewItem } from "~components/ReviewItem"
 import { useReviewQueue } from "~lib/use-review-queue"
 
@@ -81,6 +82,20 @@ export function ReviewPanel() {
                     ))}
                   </ul>
                 )}
+
+                {/* [NEW] 开发者调试面板：仅 `pnpm dev`（NODE_ENV === "development"）下渲染。
+                    这里最初想用 React.lazy + dynamic import 让 DebugPanel 连模块
+                    本体都从生产包里剔除，但实测在内容脚本的运行环境里动态 import
+                    会抛 "Cannot find module" 而彻底不可用（MV3 content script 的
+                    脚本加载机制和 Parcel 的异步 chunk 加载器不兼容），所以改回静态
+                    import，用条件渲染门控。生产构建时 NODE_ENV 会被静态替换为
+                    "production"，下面这个条件恒为 false 并被压缩器折叠掉，
+                    <DebugPanel /> 在生产环境下 100% 不会被渲染/执行——用
+                    `pnpm build` 验证过 panel.js 主包里确实不含这段 JSX 调用；
+                    唯一的代价是 DebugPanel 组件本身的源码仍会作为一个不可达模块
+                    留在打包产物里（Parcel 对这种"条件里静态 import"的场景不做
+                    跨模块死代码消除），不影响生产环境的实际行为。 */}
+                {process.env.NODE_ENV === "development" && <DebugPanel />}
               </Popover.Panel>
             </Transition>
           </>

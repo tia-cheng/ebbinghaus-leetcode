@@ -28,15 +28,25 @@ export function ReviewPanel() {
   }
 
   return (
+    // [CHANGED] z-[2147483647] 是 CSS z-index 允许的最大值（2^31-1），
+    // 比需求里要求的 99999 更高一档，确保无论 /problems/* 页面的 Monaco Editor、
+    // 拖拽 Splitter 分割条、还是 LeetCode 自己的弹窗设置了多高的 z-index 都盖不住悬浮窗。
+    // 配合 position: fixed，即使现在全站页面都注入（见 panel.tsx 的 matches），
+    // 也始终锚定在视口右下角，不随页面内部布局滚动或被裁剪。
     <div className="fixed bottom-4 right-4 z-[2147483647] font-sans text-sm">
       <Popover className="relative">
         {({ open }) => (
           <>
-            <Popover.Button className="flex items-center gap-2 rounded-full bg-orange-500 px-4 py-3 text-white shadow-lg transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300">
-              <span aria-hidden>📚</span>
-              <span>今日待复习</span>
+            {/* [CHANGED] 折叠态：默认只显示一个圆形悬浮小球（图标 + 到期数角标），
+                而不是之前占位更大的文字胶囊按钮——刷题页寸土寸金，
+                避免默认状态就遮挡代码编辑器或题目描述。点击后展开完整列表。 */}
+            <Popover.Button
+              title="Today's Ebbi ToDo"
+              aria-label="Open Ebbinghaus review list"
+              className="relative flex h-14 w-14 items-center justify-center rounded-full bg-orange-500 text-2xl text-white shadow-lg transition-transform hover:scale-105 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300">
+              <span aria-hidden>😼</span>
               {dueList.length > 0 && (
-                <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-orange-600">
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[11px] font-bold leading-none text-white">
                   {dueList.length}
                 </span>
               )}
@@ -55,10 +65,10 @@ export function ReviewPanel() {
                 static
                 className="absolute bottom-full right-0 mb-2 max-h-96 w-80 overflow-y-auto rounded-lg border border-gray-200 bg-white p-3 shadow-2xl">
                 <h3 className="mb-2 border-b border-gray-100 pb-2 text-base font-semibold text-gray-800">
-                  艾宾浩斯复习清单
+                  Ebbinghaus spaced repetition TODO List
                 </h3>
                 {dueList.length === 0 ? (
-                  <p className="py-6 text-center text-gray-400">今天没有需要复习的题目 🎉</p>
+                  <p className="py-6 text-center text-gray-400">All Done Today! 🎉</p>
                 ) : (
                   <ul className="flex flex-col gap-2">
                     {dueList.map((problem) => (

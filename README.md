@@ -1,11 +1,12 @@
 # ebbinghaus-leetcode
 
+Always forget the same leetcode even if you AC several time alreay?!
 基于艾宾浩斯记忆曲线的 LeetCode 间隔重复复习 Chrome 扩展。
 
 自动捕获你在 leetcode.com / leetcode.cn 上的 Accepted 提交，按 **1 / 3 / 7 / 15 / 30 天**
 的间隔安排复习提醒，并在 LeetCode 首页右下角显示一个悬浮复习清单。
 
-## 技术栈
+## Tech Stack
 
 - [Plasmo](https://www.plasmo.com/)（Chrome 扩展框架）
 - React 18 + TypeScript

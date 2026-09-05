@@ -14,7 +14,7 @@ interface ReviewItemProps {
 
 /** 单个复习项：题目标题（可点击跳转）+ 阶段信息 + "标记为已复习"按钮 */
 export function ReviewItem({ problem, removing, onMarkReviewed }: ReviewItemProps) {
-  const stageLabel = `第 ${problem.currentStage + 1}/${REVIEW_INTERVALS_DAYS.length} 次复习`
+  const stageLabel = `${problem.currentStage + 1}/${REVIEW_INTERVALS_DAYS.length}`
 
   return (
     <Transition
@@ -39,7 +39,7 @@ export function ReviewItem({ problem, removing, onMarkReviewed }: ReviewItemProp
           className="min-w-0 flex-1 truncate text-blue-600 hover:underline">
           {problem.questionId && (
             <span className="mr-1.5 rounded bg-orange-100 px-1.5 py-0.5 text-[11px] font-bold text-orange-700">
-              #{problem.questionId}
+              {problem.questionId}
             </span>
           )}
           {problem.title}
@@ -50,7 +50,7 @@ export function ReviewItem({ problem, removing, onMarkReviewed }: ReviewItemProp
             type="button"
             onClick={onMarkReviewed}
             className="whitespace-nowrap rounded bg-green-500 px-2 py-1 text-xs font-medium text-white transition-colors hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-            标记为已复习
+            Mark Completed
           </button>
         </div>
       </li>

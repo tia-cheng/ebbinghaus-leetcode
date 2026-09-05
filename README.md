@@ -1,4 +1,4 @@
-![puppy using Ebbinghaus Leetcode](./assets/banner.jpeg)
+![A puppy is using Ebbinghaus Leetcode extension](./assets/banner.jpeg)
 
 # Ebbinghaus Leetcode
 Always forget the same leetcode even if you AC several time already?!
@@ -43,8 +43,8 @@ pnpm install
 pnpm dev
 ```
 
-然后在 Chrome 中打开 `chrome://extensions`，开启"开发者模式"，
-点击"加载已解压的扩展程序"，选择项目生成的 `build/chrome-mv3-dev` 目录。
+In your Chrome, open [chrome://extensions](chrome://extensions)，click"开发者模式"，
+click"加载已解压的扩展程序"，choose `build/chrome-mv3-dev` 目录。
 
 ## 目录结构
 

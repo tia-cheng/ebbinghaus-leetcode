@@ -2,6 +2,7 @@ import { Fragment } from "react"
 
 import { Transition } from "@headlessui/react"
 
+import { formatQuestionTitle } from "~lib/format"
 import { REVIEW_INTERVALS_DAYS } from "~lib/spaced-repetition"
 import type { ProblemRecord } from "~lib/types"
 
@@ -27,12 +28,20 @@ export function ReviewItem({ problem, removing, onMarkReviewed }: ReviewItemProp
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-90">
       <li className="flex items-center justify-between gap-2 rounded-md border border-gray-100 bg-gray-50 px-2 py-2">
-        {/* 用原生 <a> 而不是 onClick + JS 跳转，即便 React 事件失效也能正常导航 */}
+        {/* 用原生 <a> 而不是 onClick + JS 跳转，即便 React 事件失效也能正常导航。
+            title 属性放完整的"题号 + 题名"，鼠标悬浮时即使正文被截断也能看全。
+            题号单独用一个小 badge 展示在最前面，方便刷题时快速定位题号；
+            没解析出题号的旧数据（questionId 为 null）就不渲染 badge，直接退化成纯标题。 */}
         <a
           href={problem.url}
           target="_self"
-          title={problem.title}
+          title={formatQuestionTitle(problem)}
           className="min-w-0 flex-1 truncate text-blue-600 hover:underline">
+          {problem.questionId && (
+            <span className="mr-1.5 rounded bg-orange-100 px-1.5 py-0.5 text-[11px] font-bold text-orange-700">
+              #{problem.questionId}
+            </span>
+          )}
           {problem.title}
         </a>
         <div className="flex shrink-0 items-center gap-2">

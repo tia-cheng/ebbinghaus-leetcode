@@ -12,15 +12,13 @@ import type { LeetCodeSite, ProblemRecord, ReviewStage } from "~lib/types"
 
 const DAY_MS = 24 * 60 * 60 * 1000
 
-const MOCK_PROBLEMS: Array<{ problemId: string; title: string; site: LeetCodeSite }> = [
-  { problemId: "two-sum", title: "1. Two Sum", site: "leetcode.com" },
-  { problemId: "add-two-numbers", title: "2. Add Two Numbers", site: "leetcode.com" },
-  {
-    problemId: "longest-substring-without-repeating-characters",
-    title: "3. Longest Substring Without Repeating Characters",
-    site: "leetcode.com"
-  },
-  { problemId: "median-of-two-sorted-arrays", title: "4. Median of Two Sorted Arrays", site: "leetcode.com" }
+// questionId 和 title 分开存（对应 ProblemRecord 现在的数据结构），
+// 用真实存在的题号，方便调试题号 badge 的展示效果
+const MOCK_PROBLEMS: Array<{ problemId: string; questionId: string; title: string; site: LeetCodeSite }> = [
+  { problemId: "two-sum", questionId: "1", title: "Two Sum", site: "leetcode.com" },
+  { problemId: "container-with-most-water", questionId: "11", title: "Container With Most Water", site: "leetcode.com" },
+  { problemId: "3sum", questionId: "15", title: "3Sum", site: "leetcode.com" },
+  { problemId: "median-of-two-sorted-arrays", questionId: "4", title: "Median of Two Sorted Arrays", site: "leetcode.com" }
 ]
 
 /**
@@ -34,6 +32,7 @@ export async function seedMockDueProblems(): Promise<void> {
   MOCK_PROBLEMS.forEach((mock, index) => {
     const record: ProblemRecord = {
       problemId: mock.problemId,
+      questionId: mock.questionId,
       title: mock.title,
       url: `https://${mock.site}/problems/${mock.problemId}/`,
       site: mock.site,

@@ -24,6 +24,7 @@ export function createInitialRecord(payload: AcceptedSubmissionPayload, now: num
   const initialStage: ReviewStage = 0
   return {
     problemId: payload.problemId,
+    questionId: payload.questionId,
     title: payload.title,
     url: payload.url,
     site: payload.site,

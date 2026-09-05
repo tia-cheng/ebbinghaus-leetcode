@@ -2,10 +2,13 @@ import { Fragment, useEffect, useRef, useState } from "react"
 
 import { Transition } from "@headlessui/react"
 
+import { formatQuestionTitle } from "~lib/format"
+
 const EVENT_NAME = "__ebbinghaus_lc_captured__"
 const AUTO_DISMISS_MS = 3000
 
 interface ToastDetail {
+  questionId: string | null
   title: string
   isNew: boolean
   daysUntilReview: number
@@ -61,11 +64,11 @@ export function CaptureToast() {
           </span>
           <div>
             <p className="font-semibold text-gray-800">
-              {toast?.isNew ? "已加入艾宾浩斯复习计划" : "该题已在复习队列中"}
+              {toast?.isNew ? "Added to Ebbinghaus Repeat Plan" : "This question already in your Repeat plan"}
             </p>
             {toast && (
               <p className="mt-0.5 text-xs text-gray-500">
-                {toast.title} · {reviewText}
+                {formatQuestionTitle(toast)} · {reviewText}
               </p>
             )}
           </div>

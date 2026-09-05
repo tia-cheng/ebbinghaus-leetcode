@@ -10,7 +10,8 @@ export type LeetCodeSite = "leetcode.com" | "leetcode.cn"
 // 存储在 chrome.storage 中的题目复习记录
 export interface ProblemRecord {
   problemId: string // 题目 slug，例如 "two-sum"
-  title: string
+  questionId: string | null // 题号（LeetCode 的 frontend question id），例如 "11"；解析不出来时为 null
+  title: string // 纯标题，不含题号前缀，例如 "Container With Most Water"
   url: string
   site: LeetCodeSite
   currentStage: ReviewStage
@@ -23,6 +24,7 @@ export interface ProblemRecord {
 // Content Script 捕获到 Accepted 提交后，上报给 background 的数据结构
 export interface AcceptedSubmissionPayload {
   problemId: string
+  questionId: string | null
   title: string
   url: string
   site: LeetCodeSite

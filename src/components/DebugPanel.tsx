@@ -36,7 +36,7 @@ export function DebugPanel() {
       {({ open }) => (
         <div className="mt-2 border-t border-dashed border-gray-200 pt-2">
           <Disclosure.Button className="flex w-full items-center justify-between rounded px-1 py-1 text-xs font-semibold text-purple-600 hover:bg-purple-50">
-            <span>Developer Mode</span>
+            <span>Developer Panel</span>
             <span className={`transition-transform ${open ? "rotate-180" : ""}`} aria-hidden>
               ▾
             </span>
@@ -55,28 +55,28 @@ export function DebugPanel() {
                 disabled={busy !== null}
                 onClick={runAction("seed", seedMockDueProblems)}
                 className={buttonClass}>
-                {busy === "seed" ? "写入中..." : "🧪 注入 4 道 Mock 待复习题目"}
+                {busy === "seed" ? "写入中..." : "Add 4 Test Leetcode Qs"}
               </button>
               <button
                 type="button"
                 disabled={busy !== null}
                 onClick={runAction("fast-forward", fastForwardOneDay)}
                 className={buttonClass}>
-                {busy === "fast-forward" ? "处理中..." : "⏩ 全部快进 1 天"}
+                {busy === "fast-forward" ? "处理中..." : "All Forward 1 Day"}
               </button>
               <button
                 type="button"
                 disabled={busy !== null}
                 onClick={runAction("force-due", forceAllDueNow)}
                 className={buttonClass}>
-                {busy === "force-due" ? "处理中..." : "⏰ 全部立即过期"}
+                {busy === "force-due" ? "处理中..." : "All Expire"}
               </button>
               <button
                 type="button"
                 disabled={busy !== null}
                 onClick={runAction("clear", clearAllReviewData)}
                 className={`${buttonClass} bg-red-700 hover:bg-red-600`}>
-                {busy === "clear" ? "清空中..." : "🗑️ 清空全部复习数据"}
+                {busy === "clear" ? "清空中..." : "Clear All Data"}
               </button>
             </Disclosure.Panel>
           </Transition>

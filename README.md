@@ -1,6 +1,7 @@
-# ebbinghaus-leetcode
+![puppy using Ebbinghaus Leetcode](./assets/banner.jpeg)
 
-Always forget the same leetcode even if you AC several time alreay?!
+# Ebbinghaus Leetcode
+Always forget the same leetcode even if you AC several time already?!
 基于艾宾浩斯记忆曲线的 LeetCode 间隔重复复习 Chrome 扩展。
 
 自动捕获你在 leetcode.com / leetcode.cn 上的 Accepted 提交，按 **1 / 3 / 7 / 15 / 30 天**
